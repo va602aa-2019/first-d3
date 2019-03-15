@@ -27,3 +27,15 @@ lis = lis.enter()
 // lis.text('Element number is');
 // lis.text(function(d,i){ return 'Element number is '+d  });
 lis.text((d,i) => ('Element number is '+d));
+
+
+d3.select('#btnAdd')
+  .on('click', function(){
+    console.log('Add a number');
+  });
+
+
+d3.select('#btnRemove')
+  .on('click', function(){
+    console.log('Remove a number');
+  });

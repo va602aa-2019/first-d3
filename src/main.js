@@ -1,6 +1,6 @@
 const d3 = require("d3");
 
-const numbers = [5, 10, 15];
+let numbers = [5, 10, 15];
 
 d3.select("#app")
   .append("h1")
@@ -28,10 +28,15 @@ function redraw() {
 
 d3.select("#btnAdd").on("click", function() {
   console.log("Add a number");
+  const n = Math.floor(Math.random()*100);
+  numbers.push(n);
+  redraw();
 });
 
 d3.select("#btnRemove").on("click", function() {
   console.log("Remove a number");
+  numbers = numbers.slice(1);
+  redraw();
 });
 
 

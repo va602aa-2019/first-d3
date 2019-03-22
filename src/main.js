@@ -54,6 +54,10 @@ function svgRedraw(){
     .attr('stroke-width', 1)
     .attr('stroke', 'red');
 
+  gLines.append('text')
+    .attr('dx', 5)
+    .attr('dy', 5);
+
 
   lines = lines
     .merge(gLines);
@@ -69,6 +73,13 @@ function svgRedraw(){
     // .attr('y1', (d,i) => yScale(i) )
     .attr('x2', (d,i) => xScale(d))
     // .attr('y2', (d,i) => yScale(i));
+
+  lines.select('text')
+    // .attr('x', d => xScale(d))
+
+    .attr('x', xScale)
+    .text(d => `Number: ${d}`);
+
 }
 
 

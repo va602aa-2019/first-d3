@@ -31,7 +31,6 @@ function redraw() {
 }
 
 function svgRedraw(){
-  let lines = svg.selectAll('line').data(numbers);
   const xScale = d3.scaleLinear()
     .domain([0,10000])
     .range([10,200]);
@@ -39,6 +38,8 @@ function svgRedraw(){
   const yScale = d3.scaleLinear()
     .domain([0,23])
     .range([10,290]);
+
+  let lines = svg.selectAll('line').data(numbers);
 
   //exit
   lines.exit().remove();

@@ -1,6 +1,6 @@
 const d3 = require("d3");
 
-let numbers = [5, 10, 15];
+let numbers = [5000, 7761, 3452];
 
 d3.select("#app")
   .append("h1")
@@ -32,6 +32,13 @@ function redraw() {
 
 function svgRedraw(){
   let lines = svg.selectAll('line').data(numbers);
+  const xScale = d3.scaleLinear()
+    .domain([0,10000])
+    .range([10,200]);
+
+  const yScale = d3.scaleLinear()
+    .domain([0,23])
+    .range([10,290]);
 
   //exit
   lines.exit().remove();
@@ -45,16 +52,16 @@ function svgRedraw(){
 
   //update
   lines
-    .attr('x1', 10)
-    .attr('y1', (d,i) => (10 + i * 10) )
-    .attr('x2', (d,i) => 10 + d)
-    .attr('y2', (d,i) => (10 + i * 10));
+    .attr('x1', xScale(0))
+    .attr('y1', (d,i) => yScale(i) )
+    .attr('x2', (d,i) => xScale(d))
+    .attr('y2', (d,i) => yScale(i));
 }
 
 
 d3.select("#btnAdd").on("click", function() {
   console.log("Add a number");
-  const n = Math.floor(Math.random()*100);
+  const n = Math.floor(Math.random()*10000);
   numbers.push(n);
   redraw();
   svgRedraw();

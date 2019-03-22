@@ -33,30 +33,42 @@ function redraw() {
 function svgRedraw(){
   const xScale = d3.scaleLinear()
     .domain([0,10000])
-    .range([10,200]);
+    .range([0,200]);
 
   const yScale = d3.scaleLinear()
     .domain([0,23])
     .range([10,290]);
 
-  let lines = svg.selectAll('line').data(numbers);
+  let lines = svg.selectAll('g.line').data(numbers);
 
   //exit
   lines.exit().remove();
 
   //enter
-  lines = lines.enter()
-    .append('line')
+  let gLines = lines.enter()
+    .append('g')
+    .classed('line', true);
+
+
+  gLines.append('line')
     .attr('stroke-width', 1)
-    .attr('stroke', 'red')
-    .merge(lines);
+    .attr('stroke', 'red');
+
+
+  lines = lines
+    .merge(gLines);
 
   //update
   lines
-    .attr('x1', xScale(0))
-    .attr('y1', (d,i) => yScale(i) )
+    .attr('transform', (d,i) => `translate(0,${yScale(i)})`);
+  // .attr('transform', (d,i) => 'translate(0,'+yScale(i)+')');
+
+
+  lines.select('line')
+    // .attr('x1', xScale(0))
+    // .attr('y1', (d,i) => yScale(i) )
     .attr('x2', (d,i) => xScale(d))
-    .attr('y2', (d,i) => yScale(i));
+    // .attr('y2', (d,i) => yScale(i));
 }
 
 
